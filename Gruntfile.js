@@ -23,6 +23,10 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.task.registerTask('copy', 'Copy the full src file to the dist folder', function() {
+        grunt.file.copy('src/DateFiddler.js', 'dist/DateFiddler.js');
+    });
+
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
@@ -30,7 +34,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     // Default task(s).
-    grunt.registerTask('default', ['jasmine', 'uglify']);
+    grunt.registerTask('default', ['jasmine', 'copy']);
 
+    grunt.registerTask('dist', ['jasmine', 'copy', 'uglify']);
     grunt.registerTask('test', ['jasmine']);
 };

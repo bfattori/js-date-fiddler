@@ -196,7 +196,7 @@
 
         endOfMonth: function() {
             return this.doIt(function(date) {
-                return date.setMonth(date.getMonth() + 1).setDate(date.getDate() - 1);
+                return new Date(date.setMonth(date.getMonth() + 1)).setDate(date.getDate() - 1);
             });
         },
 

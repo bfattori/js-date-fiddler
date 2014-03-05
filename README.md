@@ -48,7 +48,7 @@ plus you can generate complex dates through method chaining.
 For example:
 
     var dateFiddler = new DateFiddler();
-    dateFiddler.set().months(1).days(16).years(1969);
+    dateFiddler.set.months(1).days(16).years(1969);
 
 This will create the date "Jan 1, 1969".  You could also achieve this effect by using:
 
@@ -98,19 +98,6 @@ This will reset the fiddler to the seed date.  All subsequent operations begin f
 
 ---
 
-### .set([newDate]) _(operation modifier)_
-
-Calling set allows you to either change the date from which subsequent operations will begin from, by
-passing `newDate` (a JavaScript `Date` object or milliseconds representing a valid date) or simply
-modify the operation so subsequent operations are setters.  However, calling set
-with or without an argument changes the subsequent operations to be setters.  The following example
-sets the month to 1 (January) and the day to the 10th.
-
-    var fiddler = new DateFiddler();
-    fiddler.set().months(1).days(10);
-
----
-
 ### .get()
 
 Returns a JavaScript `Date` object which represents the current state of the fiddler.  You cannot
@@ -118,7 +105,16 @@ chain from the get method.
 
 ---
 
-### .add() _(operation modifier)_
+### .set _(operation modifier)_
+
+Changes subsequent operations to set the fiddler's date.  For example:
+
+    var fiddler = new DateFiddler();
+    fiddler.set.months(1).days(10);
+
+---
+
+### .add _(operation modifier)_
 
 Changes subsequent operations to add to the fiddler's date.  For example:
 
@@ -129,7 +125,7 @@ This would result in a date in the 6th month of the year (June).
 
 ---
 
-### .subtract() _(operation modifier)_
+### .subtract _(operation modifier)_
 
 The opposite of `.add()`.
 

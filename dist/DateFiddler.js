@@ -19,22 +19,21 @@
             return this;
         },
 
-        set: function(date) {
-            this.operation = "=";
-            this.accumulator = date ? new Date(date) : this.accumulator;
-            return this;
-        },
-
         get: function() {
             return this.accumulator;
         },
 
-        add: function() {
+        get set() {
+            this.operation = "=";
+            return this;
+        },
+
+        get add() {
             this.operation = "+";
             return this;
         },
 
-        subtract: function() {
+        get subtract() {
             this.operation = "-";
             return this;
         },
@@ -108,10 +107,16 @@
         },
 
         date: function(m, d, y) {
+            var dt;
             return this.doIt(function(date) {
-                var dt = this.op(date, date.setMonth, date.getMonth, m);
-                dt = this.op(dt, date.setDate, date.getDate, d);
-                dt = this.op(dt, date.setFullYear, date.getFullYear, y);
+                if (m instanceof Date) {
+                    dt = m;
+                } else {
+                    dt = this.op(date, date.setMonth, date.getMonth, m);
+                    dt = this.op(dt, date.setDate, date.getDate, d);
+                    dt = this.op(dt, date.setFullYear, date.getFullYear, y);
+                }
+
                 return dt;
             });
         },
@@ -196,7 +201,7 @@
 
         endOfMonth: function() {
             return this.doIt(function(date) {
-                return new Date(date.setMonth(date.getMonth() + 1)).setDate(date.getDate() - 1);
+                return date.setMonth(date.getMonth() + 1).setDate(date.getDate() - 1);
             });
         },
 

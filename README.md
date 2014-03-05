@@ -45,29 +45,29 @@ plus you can generate complex dates through method chaining.
 
 For example:
 
-   var dateFiddler = new DateFiddler();
-   dateFiddler.set().months(1).days(16).years(1969);
+    var dateFiddler = new DateFiddler();
+    dateFiddler.set().months(1).days(16).years(1969);
 
 This will create the date "Jan 1, 1969".  You could also achieve this effect by using:
 
-   dateFiddler.set().date(1, 16, 1969);
+    dateFiddler.set().date(1, 16, 1969);
 
 Both achieve the same result.  To get the date as it is currently represented by the fiddler, you call
 the `get()` method.  This will return a JavaScript `Date` object:
 
-   var myBirthday = dateFiddler.set().date(12, 25, 1971).get();
+    var myBirthday = dateFiddler.set().date(12, 25, 1971).get();
 
 This returns a new `Date` object with the date set to "Dec 25, 1971".  However, the time is set to the
 time when the `DateFiddler` was created.  When you call it without a date, it uses the current date and
 time to initialize the fiddler.  To override this, we could set the time with one of the emthods:
 
-   var myBirthday = dateFiddler.set().date(12, 25, 1971).noon().get();
+    var myBirthday = dateFiddler.set().date(12, 25, 1971).noon().get();
 
 This would return a date object with the time set to "12:00:00:000".  As you can see, you can chain
 the methods to create complex dates.  You might want to create a date standard and then always manipulate
 the date from that standard:
 
-   dateFiddler.init().add().months(2).subtract().days(5).endOfWeek().noon();
+    dateFiddler.init().add().months(2).subtract().days(5).endOfWeek().noon();
 
 Using `init()` will always start from the seed date (or current date/time).  You can call init at
 any time, but it will just revert the date back to the seed.
@@ -92,8 +92,8 @@ passing `newDate` (a JavaScript `Date` object or milliseconds representing a val
 with, or without, an argument resets the subsequent operations to be setters.  The following example
 sets the month to 1 (January) and the day to the 10th.
 
-   var fiddler = new DateFiddler();
-   fiddler.set().month(1).days(10);
+    var fiddler = new DateFiddler();
+    fiddler.set().month(1).days(10);
 
 `.get()`
 
@@ -113,36 +113,36 @@ This would result in a date in the 6th month of the year (June).
 
 The opposite of `.add()`.
 
-`.hours(hour)`
+`.hours(num)`
 
 Depending on the operation, this modifies the hours within the fiddler.
 
-`.minutes(minute)`
+`.minutes(num)`
 
 Depending on the operation, this modifies the minutes within the fiddler.
 
-`.seconds(second)`
+`.seconds(num)`
 
 Depending on the operation, this modifies the seconds within the fiddler.
 
-`.milliseconds(millisecond)`
+`.milliseconds(num)`
 
 Depending on the operation, this modifies the milliseconds within the fiddler.
 
-`.time(hour, minute, second [, millisecond])`
+`.time(hours, minutes, seconds [, milliseconds])`
 
 Depending on the operation, this will modify the time.  If the operation is `.add()`, it will
 add the `hour`, `minute`, etc. to the fiddler.  If the operation is `.set()`, it sets the time.
 
-`.days(day)`
+`.days(num)`
 
 Depending on the operation, this modifies the date (day of month) within the fiddler.
 
-`.months(month)`
+`.months(num)`
 
 Depending on the operation, this modifies the month within the fiddler.
 
-`.years(year)`
+`.years(num)`
 
 Depending on the operation, this modifies the year within the fiddler.
 

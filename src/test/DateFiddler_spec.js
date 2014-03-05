@@ -69,12 +69,20 @@ describe('DateFiddler', function() {
     it('chaining operations', function() {
     });
 
-    it('should set the date to 6/1/1954', function() {
+    it('should set the date to 6/1/1954 as a Date', function() {
         var dt = dateFiddler.init.set.date(new Date("6/1/1954")).get();
         expect(dt.getMonth()).toBe(5);
         expect(dt.getDate()).toBe(1);
         expect(dt.getFullYear()).toBe(1954);
     });
+
+    it('should set the date to 6/1/1954 as components', function() {
+        var dt = dateFiddler.init.set.date(6, 1, 1954).get();
+        expect(dt.getMonth()).toBe(5);
+        expect(dt.getDate()).toBe(1);
+        expect(dt.getFullYear()).toBe(1954);
+    });
+
 
     it('should set the day to Sunday', function() {
         var dt = dateFiddler.init.sunday.get();

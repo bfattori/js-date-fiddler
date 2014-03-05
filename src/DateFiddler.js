@@ -104,9 +104,9 @@
             ms = ms || 0;
             return this.doIt(function(date) {
                 var dt = this.op(date, date.setHours, date.getHours, h);
-                dt = this.op(dt, date.setMinutes, date.getMinutes, m);
-                dt = this.op(dt, date.setSeconds, date.getSeconds, s);
-                dt = this.op(dt, date.setMilliseconds, date.getMilliseconds, ms);
+                this.op(dt, date.setMinutes, date.getMinutes, m);
+                this.op(dt, date.setSeconds, date.getSeconds, s);
+                this.op(dt, date.setMilliseconds, date.getMilliseconds, ms);
                 return dt;
             });
         },
@@ -132,12 +132,12 @@
         date: function(m, d, y) {
             var dt;
             return this.doIt(function(date) {
-                if ((Object.prototype.toString.call(m) === "[object Date]") || m > 11) {
+                if ((Object.prototype.toString.call(m) === "[object Date]") || m > 12) {
                     dt = new Date(m);
                 } else {
-                    dt = this.op(date, date.setMonth, date.getMonth, m);
-                    dt = this.op(dt, date.setDate, date.getDate, d);
-                    dt = this.op(dt, date.setFullYear, date.getFullYear, y);
+                    dt = new Date(this.op(date, date.setMonth, date.getMonth, (m - 1)));
+                    dt = new Date(this.op(dt, date.setDate, date.getDate, d));
+                    dt = new Date(this.op(dt, date.setFullYear, date.getFullYear, y));
                 }
 
                 return dt;

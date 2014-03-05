@@ -160,7 +160,7 @@ Depending on the operation, this modifies the milliseconds within the fiddler.
 
 Depending on the operation, this will modify the time.  If the operation is `.add`, it will
 add the `hour`, `minute`, etc. to the fiddler.  If the operation is `.set`, it sets the time.
-If the operation is `.subtract`, it will subtract the components.
+If the operation is `.subtract`, it will subtract the components. _Note that hours are ZERO based_.
 
 ---
 
@@ -187,7 +187,7 @@ Depending on the operation, this modifies the year within the fiddler.
 Depending on the operation, this will modify the date.  If the operation is `.add`, it will
 add the `month`, `day`, etc. to the fiddler.  If the operation is `.set`, it sets the date.
 If the operation is `.subtract` it will subtract the components.  If you use the `Date` argument instead,
-it will act as a date setter.
+it will act as a date setter. _Note that "month" is ONE based, so January is 1 and December is 12_
 
 ---
 

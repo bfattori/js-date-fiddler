@@ -85,7 +85,7 @@ set the standard to the given date.
 
 This will reset the fiddler to the seed date.  All subsequent operations begin from the seed date.
 
-`.set([newDate])` _(modifier)_
+`.set([newDate])` _(operation modifier)_
 
 Calling set allows you to either change the date from which subsequent operations will begin from, by
 passing `newDate` (a JavaScript `Date` object or milliseconds representing a valid date).  Calling set
@@ -100,7 +100,7 @@ sets the month to 1 (January) and the day to the 10th.
 Returns a JavaScript `Date` object which represents the current state of the fiddler.  You cannot
 chain from the get method.
 
-`.add()` _(modifier)_
+`.add()` _(operation modifier)_
 
 Changes subsequent operations to add to the fiddler's date.  For example:
 
@@ -109,7 +109,7 @@ Changes subsequent operations to add to the fiddler's date.  For example:
 
 This would result in a date in the 6th month of the year (June).
 
-`.subtract()` _(modifier)_
+`.subtract()` _(operation modifier)_
 
 The opposite of `.add()`.
 

@@ -104,8 +104,8 @@ chain from the get method.
 
 Changes subsequent operations to add to the fiddler's date.  For example:
 
-   var fiddler = new DateFiddler();
-   fiddler.set().month(1).add().months(5);
+    var fiddler = new DateFiddler();
+    fiddler.set().month(1).add().months(5);
 
 This would result in a date in the 6th month of the year (June).
 

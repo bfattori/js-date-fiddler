@@ -93,7 +93,7 @@ with, or without, an argument resets the subsequent operations to be setters.  T
 sets the month to 1 (January) and the day to the 10th.
 
     var fiddler = new DateFiddler();
-    fiddler.set().month(1).days(10);
+    fiddler.set().months(1).days(10);
 
 `.get()`
 
@@ -105,7 +105,7 @@ chain from the get method.
 Changes subsequent operations to add to the fiddler's date.  For example:
 
     var fiddler = new DateFiddler();
-    fiddler.set().month(1).add().months(5);
+    fiddler.set().months(1).add().months(5);
 
 This would result in a date in the 6th month of the year (June).
 

@@ -13,7 +13,7 @@
     }
 
     DateFiddler.prototype = {
-        init: function() {
+        get init() {
             this.operation = "=";
             this.accumulator = new Date(this.targetDate);
             return this;
@@ -127,7 +127,7 @@
             });
         },
 
-        midnight: function() {
+        get midnight() {
             return this.doIt(function(date) {
                 date.setHours(0);
                 date.setMinutes(0);
@@ -137,7 +137,7 @@
             });
         },
 
-        noon: function() {
+        get noon() {
             return this.doIt(function(date) {
                 date.setHours(12);
                 date.setMinutes(0);
@@ -147,7 +147,7 @@
             });
         },
 
-        endOfDay: function() {
+        get endOfDay() {
             return this.doIt(function(date) {
                 date.setHours(23);
                 date.setMinutes(59);
@@ -157,19 +157,19 @@
             });
         },
 
-        lastMonth: function() {
+        get lastMonth() {
             return this.doIt(function(date) {
                 return date.setMonth(date.getMonth() - 1);
             });
         },
 
-        nextMonth: function() {
+        get nextMonth() {
             return this.doIt(function(date) {
                 return date.setMonth(date.getMonth() + 1);
             });
         },
 
-        startOfWeek: function() {
+        get startOfWeek() {
             return this.doIt(function(date) {
                 var sow = new Date(date.setDate(date.getDate() - date.getDay()));
                 sow.setHours(0);
@@ -180,9 +180,9 @@
             });
         },
 
-        endOfWeek: function(/* weekEndDay */) {
+        get endOfWeek() {
             // Defaults to Saturday
-            var weekEndDay = arguments[0] ? (arguments[0] + 6) % 6 : 6;
+            var weekEndDay = 6; /* arguments[0] ? (arguments[0] + 6) % 6 : 6;*/
             return this.doIt(function(date) {
                 var eow = new Date(date.setDate((date.getDate() + (weekEndDay - date.getDay()))));
                 eow.setHours(23);
@@ -193,55 +193,55 @@
             });
         },
 
-        startOfMonth: function() {
+        get startOfMonth() {
             return this.doIt(function(date) {
                 return date.setDate(1);
             });
         },
 
-        endOfMonth: function() {
+        get endOfMonth() {
             return this.doIt(function(date) {
                 return date.setMonth(date.getMonth() + 1).setDate(date.getDate() - 1);
             });
         },
 
-        sunday: function() {
+        get sunday() {
             return this.doIt(function(date) {
                 return date.setDate(date.getDate() - date.getDay());
             });
         },
 
-        monday: function() {
+        get monday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (1 - date.getDay())));
             });
         },
 
-        tuesday: function() {
+        get tuesday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (2 - date.getDay())));
             });
         },
 
-        wednesday: function() {
+        get wednesday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (3 - date.getDay())));
             });
         },
 
-        thursday: function() {
+        get thursday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (4 - date.getDay())));
             });
         },
 
-        friday: function() {
+        get friday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (5 - date.getDay())));
             });
         },
 
-        saturday: function() {
+        get saturday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (6 - date.getDay())));
             });

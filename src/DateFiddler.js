@@ -12,8 +12,31 @@
         this.accumulator = new Date(this.targetDate);
     }
 
+    function _midnight(date) {
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        date.setMilliseconds(0);
+        return date;
+    }
+
+    function _noon(date) {
+        date = _midnight(date);
+        date.setHours(12);
+        return date;
+    }
+
+    function _endOfDay(date) {
+        date.setHours(23);
+        date.setMinutes(59);
+        date.setSeconds(59);
+        date.setMilliseconds(999);
+        return date;
+    }
+
+
     DateFiddler.prototype = {
-        init: function() {
+        get init() {
             this.operation = "=";
             this.accumulator = new Date(this.targetDate);
             return this;
@@ -127,121 +150,103 @@
             });
         },
 
-        midnight: function() {
+        get midnight() {
             return this.doIt(function(date) {
-                date.setHours(0);
-                date.setMinutes(0);
-                date.setSeconds(0);
-                date.setMilliseconds(0);
-                return date;
+                return _midnight(date);
             });
         },
 
-        noon: function() {
+        get noon() {
             return this.doIt(function(date) {
-                date.setHours(12);
-                date.setMinutes(0);
-                date.setSeconds(0);
-                date.setMilliseconds(0);
-                return date;
+                return _noon(date);
             });
         },
 
-        endOfDay: function() {
+        get endOfDay() {
             return this.doIt(function(date) {
-                date.setHours(23);
-                date.setMinutes(59);
-                date.setSeconds(59);
-                date.setMilliseconds(999);
-                return date;
+                return _endOfDay(date);
             });
         },
 
-        lastMonth: function() {
+        get lastMonth() {
             return this.doIt(function(date) {
                 return date.setMonth(date.getMonth() - 1);
             });
         },
 
-        nextMonth: function() {
+        get nextMonth() {
             return this.doIt(function(date) {
                 return date.setMonth(date.getMonth() + 1);
             });
         },
 
-        startOfWeek: function() {
+        get startOfWeek() {
             return this.doIt(function(date) {
                 var sow = new Date(date.setDate(date.getDate() - date.getDay()));
-                sow.setHours(0);
-                sow.setMinutes(0);
-                sow.setSeconds(0);
-                sow.setMilliseconds(0);
-                return sow;
+                return _midnight(sow);
             });
         },
 
-        endOfWeek: function(/* weekEndDay */) {
+        get endOfWeek() {
             // Defaults to Saturday
-            var weekEndDay = arguments[0] ? (arguments[0] + 6) % 6 : 6;
+            var weekEndDay = 6; /* arguments[0] ? (arguments[0] + 6) % 6 : 6;*/
             return this.doIt(function(date) {
                 var eow = new Date(date.setDate((date.getDate() + (weekEndDay - date.getDay()))));
-                eow.setHours(23);
-                eow.setMinutes(59);
-                eow.setSeconds(59);
-                eow.setMilliseconds(999);
-                return eow;
+                return _endOfDay(eow);
             });
         },
 
-        startOfMonth: function() {
+        get startOfMonth() {
             return this.doIt(function(date) {
-                return date.setDate(1);
+                var som = date.setDate(1);
+                return _midnight(som);
             });
         },
 
-        endOfMonth: function() {
+        get endOfMonth() {
             return this.doIt(function(date) {
-                return date.setMonth(date.getMonth() + 1).setDate(date.getDate() - 1);
+                var eom = new Date(date.setMonth(date.getMonth() + 1)).setDate(date.getDate() - 1);
+                return _endOfDay(eom);
             });
         },
 
-        sunday: function() {
+        get sunday() {
             return this.doIt(function(date) {
                 return date.setDate(date.getDate() - date.getDay());
             });
         },
 
-        monday: function() {
+        get monday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (1 - date.getDay())));
             });
         },
 
-        tuesday: function() {
+        get tuesday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (2 - date.getDay())));
             });
         },
 
-        wednesday: function() {
+        get wednesday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (3 - date.getDay())));
             });
         },
 
-        thursday: function() {
+        get thursday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (4 - date.getDay())));
             });
         },
 
-        friday: function() {
+        get friday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (5 - date.getDay())));
             });
         },
 
-        saturday: function() {
+        get saturday() {
             return this.doIt(function(date) {
                 return date.setDate((date.getDate() + (6 - date.getDay())));
             });

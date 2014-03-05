@@ -92,7 +92,7 @@ set the standard to the given date.
 
 ---
 
-### .init()
+### .init
 
 This will reset the fiddler to the seed date.  All subsequent operations begin from the seed date.
 
@@ -180,7 +180,7 @@ Depending on the operation, this modifies the year within the fiddler.
 
 ---
 
-### .date(month, day, year)
+### .date([Date | month, day, year])
 
 Depending on the operation, this will modify the date.  If the operation is `.add()`, it will
 add the `month`, `day`, etc. to the fiddler.  If the operation is `.set()`, it sets the date.
@@ -193,61 +193,61 @@ Depending on the operation, this modifies the week (moving the date by 7 days) w
 
 ---
 
-### .midnight()
+### .midnight
 
 Sets the time component of the fiddler to "00:00:00:000" (exactly midnight).
 
 ---
 
-### .noon()
+### .noon
 
 Sets the time component of the fiddler to "12:00:00:000" (exactly noon).
 
 ---
 
-### .endOfDay()
+### .endOfDay
 
 Sets the time component of the fiddler to "23:59:59:999" (The very last millisecond of the day).
 
 ---
 
-### .lastMonth()
+### .lastMonth
 
 Helper method to subtract one from the month.
 
 ---
 
-### .nextMonth()
+### .nextMonth
 
 Helper method to add one to the month.
 
 ---
 
-### .startOfWeek()
+### .startOfWeek
 
 Helper method to set the date and time to the start of the week (Sunday at midnight).
 
 ---
 
-### .endOfWeek()
+### .endOfWeek
 
 Helper method to set the date and time to the end of the week (Saturday at 23:59:59:999")
 
 ---
 
-### .startOfMonth()
+### .startOfMonth
 
 Helper method to set the date to the first of the month.
 
 ---
 
-### .endOfMonth()
+### .endOfMonth
 
 Helper method to set the date to the last day of the month.
 
 ---
 
-### .sunday(), .monday(), .tuesday(), .wednesday(), .thursday(), .friday(), .saturday()
+### .sunday, .monday, .tuesday, .wednesday, .thursday, .friday, .saturday
 
 Helper methods to set the date to the corresponding day of the current week.
 

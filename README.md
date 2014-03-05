@@ -67,7 +67,12 @@ This would return a date object with the time set to "12:00:00:000".  As you can
 the methods to create complex dates.  You might want to create a date standard and then always manipulate
 the date from that standard:
 
-    dateFiddler.init().add().months(2).subtract().days(5).endOfWeek().noon();
+    // Create the standard
+    var dateFiddler = new DateFiddler();
+
+    // Get two different dates from the fiddler
+    var date1 = dateFiddler.init().add().months(2).subtract().days(5).endOfWeek().noon().get();
+    var date2 = dateFiddler.init().lastMonth().startOfWeek().midnight().get();
 
 Using `init()` will always start from the seed date (or current date/time).  You can call init at
 any time, but it will just revert the date back to the seed.

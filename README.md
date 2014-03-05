@@ -94,7 +94,8 @@ set the standard to the given date.
 
 ### .init
 
-This will reset the fiddler to the seed date.  All subsequent operations begin from the seed date.
+This will reset the fiddler to the seed date.  All subsequent operations begin from the seed date, and the
+operation is reset to `.set`.
 
 ---
 

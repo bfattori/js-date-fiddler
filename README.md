@@ -105,7 +105,7 @@ chain from the get method.
 
 ---
 
-### .set _(operation modifier)_
+### .set - _operation modifier_
 
 Changes subsequent operations to set the fiddler's date.  For example:
 
@@ -114,7 +114,7 @@ Changes subsequent operations to set the fiddler's date.  For example:
 
 ---
 
-### .add _(operation modifier)_
+### .add - _operation modifier_
 
 Changes subsequent operations to add to the fiddler's date.  For example:
 
@@ -125,7 +125,7 @@ This would result in a date in the 6th month of the year (June).
 
 ---
 
-### .subtract _(operation modifier)_
+### .subtract - _operation modifier_
 
 The opposite of `.add()`.
 

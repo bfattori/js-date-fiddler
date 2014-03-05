@@ -103,10 +103,10 @@
         time: function(h, m, s, ms) {
             ms = ms || 0;
             return this.doIt(function(date) {
-                var dt = this.op(date, date.setHours, date.getHours, h);
-                this.op(dt, date.setMinutes, date.getMinutes, m);
-                this.op(dt, date.setSeconds, date.getSeconds, s);
-                this.op(dt, date.setMilliseconds, date.getMilliseconds, ms);
+                var dt = new Date(this.op(date, date.setHours, date.getHours, h));
+                dt = new Date(this.op(dt, date.setMinutes, date.getMinutes, m));
+                dt = new Date(this.op(dt, date.setSeconds, date.getSeconds, s));
+                dt = new Date(this.op(dt, date.setMilliseconds, date.getMilliseconds, ms));
                 return dt;
             });
         },

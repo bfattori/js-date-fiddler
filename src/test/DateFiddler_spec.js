@@ -83,6 +83,13 @@ describe('DateFiddler', function() {
         expect(dt.getFullYear()).toBe(1954);
     });
 
+    it('should set the time to 4:30:00:000', function() {
+        var dt = dateFiddler.init.set.time(4, 30, 0, 0).get();
+        expect(dt.getHours()).toBe(4);
+        expect(dt.getMinutes()).toBe(30);
+        expect(dt.getSeconds()).toBe(0);
+        expect(dt.getMilliseconds()).toBe(0);
+    });
 
     it('should set the day to Sunday', function() {
         var dt = dateFiddler.init.sunday.get();

@@ -1,5 +1,6 @@
-js-date-fiddler
+js-date-fiddler [![Build Status](https://travis-ci.org/bfattori/js-date-fiddler.png?branch=master)](https://travis-ci.org/bfattori/js-date-fiddler)
 ===============
+
 
 A JavaScript Library for manipulating dates when testing
 

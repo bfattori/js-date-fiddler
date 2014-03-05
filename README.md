@@ -92,7 +92,7 @@ set the standard to the given date.
 
 ---
 
-### .init
+### .reset
 
 This will reset the fiddler to the seed date.  All subsequent operations begin from the seed date, and the
 operation is reset to `.set`.
@@ -212,18 +212,6 @@ Sets the time component of the fiddler to "12:00:00:000" (exactly noon).
 ### .endOfDay
 
 Sets the time component of the fiddler to "23:59:59:999" (The very last millisecond of the day).
-
----
-
-### .lastMonth
-
-Helper method to subtract one from the month.
-
----
-
-### .nextMonth
-
-Helper method to add one to the month.
 
 ---
 

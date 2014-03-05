@@ -36,7 +36,7 @@
 
 
     DateFiddler.prototype = {
-        get init() {
+        get reset() {
             this.operation = "=";
             this.accumulator = new Date(this.targetDate);
             return this;
@@ -165,18 +165,6 @@
         get endOfDay() {
             return this.doIt(function(date) {
                 return _endOfDay(date);
-            });
-        },
-
-        get lastMonth() {
-            return this.doIt(function(date) {
-                return date.setMonth(date.getMonth() - 1);
-            });
-        },
-
-        get nextMonth() {
-            return this.doIt(function(date) {
-                return date.setMonth(date.getMonth() + 1);
             });
         },
 

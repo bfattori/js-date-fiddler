@@ -11,6 +11,8 @@ which allows you to describe your dates.  You can manipulate dates with easy to
 remember methods and modifiers.
 
 ## Installation
+_This is only necessary if you plan to rebuild the library_
+
 You will need to install a couple of NodeJS Modules before you can build the library.
 For starters, you'll need to install Grunt to use the build system.  It's usually best
 to install it globally (if you haven't already)

@@ -78,20 +78,20 @@ The following methods are provided by DateFiddler.
 
 ---
 
-`new DateFiddler([seedDate])`
+### new DateFiddler([seedDate])
 
 This creates a new instance of a fiddler.  The `seedDate` argument is optional - if provided, it will
 set the standard to the given date.
 
 ---
 
-`.init()`
+### .init()
 
 This will reset the fiddler to the seed date.  All subsequent operations begin from the seed date.
 
 ---
 
-`.set([newDate])` _(operation modifier)_
+### .set([newDate]) _(operation modifier)_
 
 Calling set allows you to either change the date from which subsequent operations will begin from, by
 passing `newDate` (a JavaScript `Date` object or milliseconds representing a valid date).  Calling set
@@ -103,14 +103,14 @@ sets the month to 1 (January) and the day to the 10th.
 
 ---
 
-`.get()`
+### .get()
 
 Returns a JavaScript `Date` object which represents the current state of the fiddler.  You cannot
 chain from the get method.
 
 ---
 
-`.add()` _(operation modifier)_
+### .add() _(operation modifier)_
 
 Changes subsequent operations to add to the fiddler's date.  For example:
 
@@ -121,131 +121,129 @@ This would result in a date in the 6th month of the year (June).
 
 ---
 
-`.subtract()` _(operation modifier)_
+### .subtract() _(operation modifier)_
 
 The opposite of `.add()`.
 
 ---
 
-`.hours(num)`
+### .hours(num)
 
 Depending on the operation, this modifies the hours within the fiddler.
 
 ---
 
-`.minutes(num)`
+### .minutes(num)
 
 Depending on the operation, this modifies the minutes within the fiddler.
 
 ---
 
-`.seconds(num)`
-
----
+### .seconds(num)
 
 Depending on the operation, this modifies the seconds within the fiddler.
 
 ---
 
-`.milliseconds(num)`
+### .milliseconds(num)
 
 Depending on the operation, this modifies the milliseconds within the fiddler.
 
 ---
 
-`.time(hours, minutes, seconds [, milliseconds])`
+### .time(hours, minutes, seconds [, milliseconds])
 
 Depending on the operation, this will modify the time.  If the operation is `.add()`, it will
 add the `hour`, `minute`, etc. to the fiddler.  If the operation is `.set()`, it sets the time.
 
 ---
 
-`.days(num)`
+### .days(num)
 
 Depending on the operation, this modifies the date (day of month) within the fiddler.
 
 ---
 
-`.months(num)`
+### .months(num)
 
 Depending on the operation, this modifies the month within the fiddler.
 
 ---
 
-`.years(num)`
+### .years(num)
 
 Depending on the operation, this modifies the year within the fiddler.
 
 ---
 
-`.date(month, day, year)`
+### .date(month, day, year)
 
 Depending on the operation, this will modify the date.  If the operation is `.add()`, it will
 add the `month`, `day`, etc. to the fiddler.  If the operation is `.set()`, it sets the date.
 
 ---
 
-`.weeks(num)`
+### .weeks(num)
 
 Depending on the operation, this modifies the week (moving the date by 7 days) within the fiddler.
 
 ---
 
-`.midnight()`
+### .midnight()
 
 Sets the time component of the fiddler to "00:00:00:000" (exactly midnight).
 
 ---
 
-`.noon()`
+### .noon()
 
 Sets the time component of the fiddler to "12:00:00:000" (exactly noon).
 
 ---
 
-`.endOfDay()`
+### .endOfDay()
 
 Sets the time component of the fiddler to "23:59:59:999" (The very last millisecond of the day).
 
 ---
 
-`.lastMonth()`
+### .lastMonth()
 
 Helper method to subtract one from the month.
 
 ---
 
-`.nextMonth()`
+### .nextMonth()
 
 Helper method to add one to the month.
 
 ---
 
-`.startOfWeek()`
+### .startOfWeek()
 
 Helper method to set the date and time to the start of the week (Sunday at midnight).
 
 ---
 
-`.endOfWeek()`
+### .endOfWeek()
 
 Helper method to set the date and time to the end of the week (Saturday at 23:59:59:999")
 
 ---
 
-`.startOfMonth()`
+### .startOfMonth()
 
 Helper method to set the date to the first of the month.
 
 ---
 
-`.endOfMonth()`
+### .endOfMonth()
 
 Helper method to set the date to the last day of the month.
 
 ---
 
-`.sunday()` thru `.saturday()`
+### .sunday(), .monday(), .tuesday(), .wednesday(), .thursday(), .friday(), .saturday()
 
 Helper methods to set the date to the corresponding day of the current week.
 

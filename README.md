@@ -35,8 +35,8 @@ To create the distribution files:
 `grunt dist`
 
 ## How Does this Work, Exactly?
-To begin, you'll need to create a DateFiddler.  You can either create a `new DateFiddler()` with the
-current date, or you can pass it a seed date with `new DateFiddler(seedDate)`.  The date you pass should be a
+To begin, you'll need to create a DateFiddler.  You can either create a `new DateFiddler()` which uses the
+current date and time, or you can pass it a seed date with `new DateFiddler(seedDate)`.  The date you pass should be a
 valid JavaScript `Date` object.
 
 Then you can begin manipulating the date with the methods provided.  You can advance the day, month, year,
@@ -94,8 +94,9 @@ This will reset the fiddler to the seed date.  All subsequent operations begin f
 ### .set([newDate]) _(operation modifier)_
 
 Calling set allows you to either change the date from which subsequent operations will begin from, by
-passing `newDate` (a JavaScript `Date` object or milliseconds representing a valid date).  Calling set
-with, or without, an argument resets the subsequent operations to be setters.  The following example
+passing `newDate` (a JavaScript `Date` object or milliseconds representing a valid date) or simply
+modify the operation so subsequent operations are setters.  However, calling set
+with or without an argument changes the subsequent operations to be setters.  The following example
 sets the month to 1 (January) and the day to the 10th.
 
     var fiddler = new DateFiddler();

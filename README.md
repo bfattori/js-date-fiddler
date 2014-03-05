@@ -59,7 +59,7 @@ the `get()` method.  This will return a JavaScript `Date` object:
 
 This returns a new `Date` object with the date set to "Dec 25, 1971".  However, the time is set to the
 time when the `DateFiddler` was created.  When you call it without a date, it uses the current date and
-time to initialize the fiddler.  To override this, we could set the time with one of the emthods:
+time to initialize the fiddler.  To override this, we could set the time with one of the methods:
 
     var myBirthday = dateFiddler.set().date(12, 25, 1971).noon().get();
 

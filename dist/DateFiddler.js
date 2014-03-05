@@ -132,8 +132,8 @@
         date: function(m, d, y) {
             var dt;
             return this.doIt(function(date) {
-                if (m instanceof Date) {
-                    dt = m;
+                if ((Object.prototype.toString.call(m) === "[object Date]") || m > 11) {
+                    dt = new Date(m);
                 } else {
                     dt = this.op(date, date.setMonth, date.getMonth, m);
                     dt = this.op(dt, date.setDate, date.getDate, d);

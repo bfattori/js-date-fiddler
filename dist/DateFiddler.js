@@ -12,6 +12,29 @@
         this.accumulator = new Date(this.targetDate);
     }
 
+    function _midnight(date) {
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        date.setMilliseconds(0);
+        return date;
+    }
+
+    function _noon(date) {
+        date = _midnight(date);
+        date.setHours(12);
+        return date;
+    }
+
+    function _endOfDay(date) {
+        date.setHours(23);
+        date.setMinutes(59);
+        date.setSeconds(59);
+        date.setMilliseconds(999);
+        return date;
+    }
+
+
     DateFiddler.prototype = {
         get init() {
             this.operation = "=";
@@ -129,31 +152,19 @@
 
         get midnight() {
             return this.doIt(function(date) {
-                date.setHours(0);
-                date.setMinutes(0);
-                date.setSeconds(0);
-                date.setMilliseconds(0);
-                return date;
+                return _midnight(date);
             });
         },
 
         get noon() {
             return this.doIt(function(date) {
-                date.setHours(12);
-                date.setMinutes(0);
-                date.setSeconds(0);
-                date.setMilliseconds(0);
-                return date;
+                return _noon(date);
             });
         },
 
         get endOfDay() {
             return this.doIt(function(date) {
-                date.setHours(23);
-                date.setMinutes(59);
-                date.setSeconds(59);
-                date.setMilliseconds(999);
-                return date;
+                return _endOfDay(date);
             });
         },
 
@@ -172,11 +183,7 @@
         get startOfWeek() {
             return this.doIt(function(date) {
                 var sow = new Date(date.setDate(date.getDate() - date.getDay()));
-                sow.setHours(0);
-                sow.setMinutes(0);
-                sow.setSeconds(0);
-                sow.setMilliseconds(0);
-                return sow;
+                return _midnight(sow);
             });
         },
 
@@ -185,23 +192,21 @@
             var weekEndDay = 6; /* arguments[0] ? (arguments[0] + 6) % 6 : 6;*/
             return this.doIt(function(date) {
                 var eow = new Date(date.setDate((date.getDate() + (weekEndDay - date.getDay()))));
-                eow.setHours(23);
-                eow.setMinutes(59);
-                eow.setSeconds(59);
-                eow.setMilliseconds(999);
-                return eow;
+                return _endOfDay(eow);
             });
         },
 
         get startOfMonth() {
             return this.doIt(function(date) {
-                return date.setDate(1);
+                var som = date.setDate(1);
+                return _midnight(som);
             });
         },
 
         get endOfMonth() {
             return this.doIt(function(date) {
-                return date.setMonth(date.getMonth() + 1).setDate(date.getDate() - 1);
+                var eom = new Date(date.setMonth(date.getMonth() + 1)).setDate(date.getDate() - 1);
+                return _endOfDay(eom);
             });
         },
 

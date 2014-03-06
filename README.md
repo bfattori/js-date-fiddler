@@ -129,7 +129,7 @@ the date from that standard:
     var date1 = dateFiddler.reset.add.months(2).subtract.days(5).endOfWeek.noon.get();
     var date2 = dateFiddler.reset.lastMonth.startOfWeek.midnight.get();
 
-Using `reset` will always start from the seed date (or current date/time).  You can call init at
+Using `reset` will always start from the seed date (or current date/time).  You can call `reset` at
 any time, but it will just revert the date back to the seed.
 
 ## API

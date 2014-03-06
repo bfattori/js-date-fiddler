@@ -103,7 +103,7 @@ For example:
     var dateFiddler = new DateFiddler();
     dateFiddler.set.months(1).days(16).years(1969);
 
-This will create the date "Jan 1, 1969".  You could also achieve this effect by using:
+This will create the date "Jan 16, 1969".  You could also achieve this effect by using:
 
     dateFiddler.set.date(1, 16, 1969);
 

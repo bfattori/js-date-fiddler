@@ -37,7 +37,7 @@ by using three parsed dates.
 
 However, if I don't know what `DATE` is going to be, in advance, I have to use the first example.
 Using _DateFiddler's_ DSL is what makes manipulating and understanding the dates much easier.
-When _DateFiddler_ really shines is when you have to do very complex date manipulations. In traditional
+When _DateFiddler_ really shines is when you have to do complex, or many, date manipulations. In traditional
 JavaScript, you would have to jump through many hoops to generate a complex date.
 
     var dt = new Date();

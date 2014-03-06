@@ -11,6 +11,58 @@ This library aims to make testing with dates a lot simpler by providing a simple
 which allows you to describe your dates.  You can manipulate dates with easy to
 remember methods and modifiers.
 
+For example, let's say you have a need to test date ranges.  Typically you find yourself
+creating dates that you can use to test.
+
+    var DATE = new Date();
+    var DATE_TOMORROW = new Date(DATE);
+    var DATE_YESTERDAY = new Date(DATE);
+    DATE_TOMORROW = DATE_TOMORROW.setDate(DATE_TOMORROW.getDate() + 1);
+    DATE_YESTERDAY = DATE_YESTERDAY.setDate(DATE_YESTERDAY.getDate() - 1);
+
+As you can see from this example, it's a complex glop of code to generate these three dates.
+With _DateFiddler_ you could achieve the same (and have cleaner, more readable code).
+
+    var dateFiddler = new DateFiddler();
+    var DATE = dateFiddler.get();
+    var DATE_TOMORROW = dateFiddler.add.days(1).get();
+    var DATE_YESTERDAY = dateFiddler.reset.subtract.days(1).get();
+
+Now, obviously my pure JavaScript example is a bit contrived.  I could have achieved it
+by using three parsed dates.
+
+    var DATE = new Date('5/5/2013');
+    var DATE_TOMORROW = new Date('5/6/2013');
+    var DATE_YESTERDAY = new Date('5/4/2013');
+
+However, if I don't know what `DATE` is going to be, in advance, I have to use the first example.
+Using _DateFiddler's_ DSL is what makes manipulating and understanding the dates much easier.
+When _DateFiddler_ really shines is when you have to do very complex date manipulations. In traditional
+JavaScript, you would have to jump through many hoops to generate a complex date.
+
+    var dt = new Date();
+    dt.setMonths(dt.getMonths() + 3);
+    dt.setDate(dt.getDate() + (5 - dt.getDay()));  // Friday
+    dt.setHours(23);
+    dt.setMinutes(59);
+    dt.setSeconds(59);
+    dt.setMilliseconds(999);
+
+    // Give use a variable that describes the date
+    var DATE_THREE_MONTHS_AHEAD_FRIDAY_END_OF_DAY = dt;
+
+With _DateFiddler_ this becomes much simpler. You use the DSL to describe the date, which also means
+no need for a descriptive variable name.  Plus, imagine having to generate more than just one date
+like this.
+
+    var dateFiddler = new DateFiddler();
+    var fridayEndOfDay = dateFiddler.add.months(3).friday.endOfDay.get();
+    var wednesdayNoon = dateFiddler.wednesday.noon.get();
+    var saturdayMidnight = dateFiddler.saturday.midnight.get();
+    var saturdayMidnightNextWeek = dateFiddler.add.weeks(1);
+
+This is much simpler than the pure JavaScript.
+
 ## Installation
 _This is only necessary if you plan to rebuild the library_
 

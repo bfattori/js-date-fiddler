@@ -181,7 +181,7 @@ This would result in a date in the 6th month of the year (June).
 
 ### .subtract - _operation modifier_
 
-The opposite of `.add`.
+The inverse of `.add`.
 
 ---
 

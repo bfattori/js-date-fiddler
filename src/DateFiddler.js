@@ -6,29 +6,27 @@
  */
 (function(root, Date, TimezoneJS, undefined) {
 
-    var DateObj = Date;
     var tzExist = TimezoneJS !== undefined;
-    var currentZone = tzExist ? 'America/New_York' : undefined;
+    var DateObj, currentZone = tzExist ? 'America/New_York' : undefined;
 
-    function makeValidDate(dt, tz) {
-        if (dt && (tzExist && tz)) {
-            return new DateObj(dt, tz);
-        } else if (dt) {
-            return new DateObj(dt);
-        } else {
-            return new DateObj();
+    function makeValidDate(dt) {
+        var d = new DateObj(dt);
+        if (tzExist && d.setTimezone) {
+            d.setTimezone(currentZone);
         }
+        return d;
     }
 
     function DateFiddler(targetDate, timezone) {
+        DateObj = Date;
         if (tzExist) {
             DateObj = TimezoneJS.Date;
-            currentZone = timezone || currentZone;
+            currentZone = timezone ? timezone : currentZone;
         }
-        this.targetDate = targetDate || new DateObj();
+        this.targetDate = makeValidDate(targetDate) || new DateObj();
         this.operation = "=";
 
-        this.accumulator = makeValidDate(this.targetDate, currentZone);
+        this.accumulator = makeValidDate(this.targetDate);
     }
 
     function _midnight(date) {
@@ -57,12 +55,12 @@
     DateFiddler.prototype = {
         get reset() {
             this.operation = "=";
-            this.accumulator = makeValidDate(this.targetDate, currentZone);
+            this.accumulator = makeValidDate(this.targetDate);
             return this;
         },
 
         get: function() {
-            return this.accumulator;
+            return makeValidDate(this.accumulator);
         },
 
         getTimezone: function() {
@@ -89,7 +87,7 @@
         },
 
         doIt: function(fn) {
-            this.accumulator = makeValidDate(fn.call(this, makeValidDate(this.accumulator, currentZone)));
+            this.accumulator = makeValidDate(fn.call(this, this.accumulator));
             return this;
         },
 
@@ -130,10 +128,10 @@
         time: function(h, m, s, ms) {
             ms = ms || 0;
             return this.doIt(function(date) {
-                var dt = makeValidDate(this.op(date, date.setHours, date.getHours, h), currentZone);
-                dt = makeValidDate(this.op(dt, date.setMinutes, date.getMinutes, m), currentZone);
-                dt = makeValidDate(this.op(dt, date.setSeconds, date.getSeconds, s), currentZone);
-                dt = makeValidDate(this.op(dt, date.setMilliseconds, date.getMilliseconds, ms), currentZone);
+                var dt = makeValidDate(this.op(date, date.setHours, date.getHours, h));
+                dt = makeValidDate(this.op(dt, date.setMinutes, date.getMinutes, m));
+                dt = makeValidDate(this.op(dt, date.setSeconds, date.getSeconds, s));
+                dt = makeValidDate(this.op(dt, date.setMilliseconds, date.getMilliseconds, ms));
                 return dt;
             });
         },
@@ -159,13 +157,16 @@
         date: function(m, d, y, z) {
             var dt;
             return this.doIt(function(date) {
-                currentZone = tzExist ? z : currentZone;
-                if ((Object.prototype.toString.call(m) === "[object Date]") || m > 12) {
-                    dt = makeValidDate(m, currentZone);
+                if (z !== undefined) {
+                    currentZone = tzExist ? z : currentZone;
+                }
+
+                if (m.getTimezoneInfo || (Object.prototype.toString.call(m) === "[object Date]") || m > 12) {
+                    dt = makeValidDate(m);
                 } else {
-                    dt = makeValidDate(this.op(date, date.setMonth, date.getMonth, (m - 1)), currentZone);
-                    dt = makeValidDate(this.op(dt, date.setDate, date.getDate, d), currentZone);
-                    dt = makeValidDate(this.op(dt, date.setFullYear, date.getFullYear, y), currentZone);
+                    dt = makeValidDate(this.op(date, date.setMonth, date.getMonth, (m - 1)));
+                    dt = makeValidDate(this.op(dt, date.setDate, date.getDate, d));
+                    dt = makeValidDate(this.op(dt, date.setFullYear, date.getFullYear, y));
                 }
 
                 return dt;
@@ -198,7 +199,7 @@
 
         get startOfWeek() {
             return this.doIt(function(date) {
-                var sow = makeValidDate(date.setDate(date.getDate() - date.getDay()), currentZone);
+                var sow = makeValidDate(date.setDate(date.getDate() - date.getDay()));
                 return _midnight(sow);
             });
         },
@@ -207,7 +208,7 @@
             // Defaults to Saturday
             var weekEndDay = 6; /* arguments[0] ? (arguments[0] + 6) % 6 : 6;*/
             return this.doIt(function(date) {
-                var eow = makeValidDate(date.setDate((date.getDate() + (weekEndDay - date.getDay()))), currentZone);
+                var eow = makeValidDate(date.setDate((date.getDate() + (weekEndDay - date.getDay()))));
                 return _endOfDay(eow);
             });
         },
@@ -221,7 +222,7 @@
 
         get endOfMonth() {
             return this.doIt(function(date) {
-                var eom = makeValidDate(date.setMonth(date.getMonth() + 1)).setDate(date.getDate() - 1, currentZone);
+                var eom = makeValidDate(date.setMonth(date.getMonth() + 1)).setDate(date.getDate() - 1);
                 return _endOfDay(eom);
             });
         },
@@ -271,7 +272,6 @@
         timezone: function(tz) {
             if (tzExist) {
                 currentZone = tz;
-                this.accumulator.setTimezone(tz);
             }
             return this;
         }

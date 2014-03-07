@@ -144,6 +144,11 @@ Also, you'll need to grab the Olson timezone files.  See [the TimezoneJS GitHub 
 for more information on how to acquire those.  Once you have that set up, you can use the `timezone` arguments, and you
 can use the `timezone()` method.  If you don't install TimezoneJS, the `timezone` arguments do nothing.
 
+### Something to Consider when using TimezoneJS
+
+The `Date` and `timezoneJS.Date` object are not the same.  When you use _DateFiddler_ with TimezoneJS, you should
+keep this in mind.  Mixing `Date` with `timezoneJS.Date` can have unpredictable results.  If you initialize your
+_DateFiddler_ with a `Date` object, make sure all operations are done with a `Date` in mind.
 
 ## API
 
@@ -279,6 +284,10 @@ Depending on the operation, this modifies the week (moving the date by 7 days) w
 ### .timezone(string)
 
 If you have TimezoneJS installed, this will set the timezone of the date, otherwise it does nothing.
+
+    var dateFiddler = new DateFiddler();
+    dateFiddler.timezone('America/New_York').set.hours(6).timezone('America/Chicago');
+    expect(dateFiddler.get().getHours()).toEqual(5);
 
 ---
 

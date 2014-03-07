@@ -59,7 +59,7 @@ like this.
     var fridayEndOfDay = dateFiddler.add.months(3).friday.endOfDay.get();
     var wednesdayNoon = dateFiddler.wednesday.noon.get();
     var saturdayMidnight = dateFiddler.saturday.midnight.get();
-    var saturdayMidnightNextWeek = dateFiddler.add.weeks(1);
+    var saturdayMidnightNextWeek = dateFiddler.add.weeks(1).get();
 
 This is much simpler than the pure JavaScript.
 

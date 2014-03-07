@@ -168,4 +168,13 @@ describe('DateFiddler', function() {
         expect(dt.getMilliseconds()).toBe(999);
     });
 
+    it('should work with chaining', function() {
+        var dt = dateFiddler.reset.add.months(3).friday.endOfDay.get();
+        expect(dt.getMonth()).toBe(DATE.getMonth() + 3);
+        expect(dt.getDay()).toBe(5);
+        expect(dt.getHours()).toBe(23);
+        expect(dt.getMinutes()).toBe(59);
+        expect(dt.getSeconds()).toBe(59);
+        expect(dt.getMilliseconds()).toBe(999);
+    });
 });

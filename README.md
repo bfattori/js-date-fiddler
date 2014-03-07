@@ -57,6 +57,8 @@ like this.
 
     var dateFiddler = new DateFiddler();
     var fridayEndOfDay = dateFiddler.add.months(3).friday.endOfDay.get();
+    
+    // Let's do a few more for posterity... and to show how simple it is!
     var wednesdayNoon = dateFiddler.wednesday.noon.get();
     var saturdayMidnight = dateFiddler.saturday.midnight.get();
     var saturdayMidnightNextWeek = dateFiddler.add.weeks(1).get();

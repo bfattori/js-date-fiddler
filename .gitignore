@@ -2,3 +2,6 @@ node_modules
 npm-debug.log
 .idea
 .DS_Store
+src/test/lib/date.js
+src/test/lib/jquery.js
+src/test/tz

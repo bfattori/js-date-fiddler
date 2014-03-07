@@ -13,11 +13,17 @@ module.exports = function(grunt) {
             }
         },
         jasmine: {
-            pivotal: {
+            noTZ: {
                 src: 'src/DateFiddler.js',
                 options: {
-                    specs: 'src/test/DateFiddler_spec.js',
-                    helpers: 'spec/*Helper.js'
+                    specs: 'src/test/DateFiddler_spec.js'
+                }
+            },
+            withTZ: {
+                src: 'src/DateFiddler.js',
+                options: {
+                    vendor: ['src/test/lib/jquery.js', 'src/test/lib/date.js'],
+                    specs: 'src/test/DateFiddlerTZ_spec.js'
                 }
             }
         }
@@ -37,5 +43,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['jasmine', 'copy']);
 
     grunt.registerTask('dist', ['jasmine', 'copy', 'uglify']);
-    grunt.registerTask('test', ['jasmine']);
+    grunt.registerTask('test', ['jasmine:noTZ', 'jasmine:withTZ']);
+    grunt.registerTask('testNoTZ', ['jasmine:noTZ']);
+    grunt.registerTask('testTZ', ['jasmine:withTZ']);
 };

@@ -1,21 +1,26 @@
-describe('DateFiddler', function() {
+describe('DateFiddler with TimezoneJS', function() {
 
-    var DATE = new Date();
-    var DATE_TOMORROW = new Date(DATE);
-    var DATE_YESTERDAY = new Date(DATE);
+    timezoneJS.timezone.zoneFileBasePath = 'src/test/tz';
+    timezoneJS.timezone.init({
+        async: false
+    });
 
-    DATE_TOMORROW = new Date(DATE_TOMORROW.setDate(DATE_TOMORROW.getDate() + 1));
-    DATE_YESTERDAY = new Date(DATE_YESTERDAY.setDate(DATE_YESTERDAY.getDate() - 1));
+    var DATE = new timezoneJS.Date();
+    var DATE_TOMORROW = new timezoneJS.Date(DATE);
+    var DATE_YESTERDAY = new timezoneJS.Date(DATE);
+
+    DATE_TOMORROW = new timezoneJS.Date(DATE_TOMORROW.setDate(DATE_TOMORROW.getDate() + 1));
+    DATE_YESTERDAY = new timezoneJS.Date(DATE_YESTERDAY.setDate(DATE_YESTERDAY.getDate() - 1));
 
     var dateFiddler = new DateFiddler(DATE);
     console.log(dateFiddler.get());
 
     it('date() should return the DateFiddler with the internal date set to the initial date', function() {
-        expect(dateFiddler.reset.accumulator).toEqual(DATE);
+        expect(dateFiddler.reset.accumulator.getTime()).toEqual(DATE.getTime());
     });
 
     it('get() should return the Date object which the fiddler is currently at', function() {
-        expect(dateFiddler.get()).toEqual(DATE);
+        expect(dateFiddler.get().getTime()).toEqual(DATE.getTime());
     });
 
     it('set should change the operation to "="', function() {
@@ -23,7 +28,7 @@ describe('DateFiddler', function() {
     });
 
     it('date() should set the date if it is specified', function() {
-        expect(dateFiddler.set.date(DATE_TOMORROW).accumulator).toEqual(DATE_TOMORROW);
+        expect(dateFiddler.set.date(DATE_TOMORROW).accumulator.getTime()).toEqual(DATE_TOMORROW.getTime());
     });
 
     it('add should change the operation to +', function() {
@@ -45,25 +50,25 @@ describe('DateFiddler', function() {
         dateFiddler.set.date(DATE);
         dateFiddler.doIt(doNothing);
         expect(self).toBe(dateFiddler);
-        expect(dt).toEqual(DATE);
+        expect(dt.getTime()).toEqual(DATE.getTime());
     });
 
     it('op() should perform an operation on a date based on the operation, setter, and getter methods', function() {
-        var dt = new Date(DATE);
+        var dt = new timezoneJS.Date(DATE);
 
         dateFiddler.reset.add;
-        var oppedDate = new Date(dateFiddler.op(dt, dt.setDate, dt.getDate, 1));
-        expect(oppedDate).toEqual(DATE_TOMORROW);
+        var oppedDate = new timezoneJS.Date(dateFiddler.op(dt, dt.setDate, dt.getDate, 1));
+        expect(oppedDate.getTime()).toEqual(DATE_TOMORROW.getTime());
     });
 
     it('add().days(1) should add a day to the date', function() {
         var tomorrow = dateFiddler.reset.add.days(1).get();
-        expect(tomorrow).toEqual(DATE_TOMORROW);
+        expect(tomorrow.getTime()).toEqual(DATE_TOMORROW.getTime());
     });
 
     it('subtract().days(1) should subtract a day from the date', function() {
         var tomorrow = dateFiddler.reset.subtract.days(1).get();
-        expect(tomorrow).toEqual(DATE_YESTERDAY);
+        expect(tomorrow.getTime()).toEqual(DATE_YESTERDAY.getTime());
     });
 
     it('chaining operations', function() {
@@ -168,4 +173,8 @@ describe('DateFiddler', function() {
         expect(dt.getMilliseconds()).toBe(999);
     });
 
+    it('should change the time when the timezone is changed', function() {
+        var dt = dateFiddler.reset.set.hours(6).timezone('America/Chicago');
+        expect(dt.get().getHours()).toEqual(5);
+    });
 });

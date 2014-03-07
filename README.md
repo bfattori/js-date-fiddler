@@ -1,8 +1,8 @@
 js-date-fiddler [![Build Status](https://travis-ci.org/bfattori/js-date-fiddler.png?branch=master)](https://travis-ci.org/bfattori/js-date-fiddler)
 ===============
 
-
-A JavaScript Library for manipulating dates when testing
+A JavaScript Library for manipulating dates when testing -
+__Now with TimezoneJS Support!__
 
 ## What Is This?
 When testing using tools such as Jasmine or QUnit, it becomes necessary to be able to
@@ -132,16 +132,30 @@ the date from that standard:
 Using `reset` will always start from the seed date (or current date/time).  You can call `reset` at
 any time, but it will just revert the date back to the seed.
 
+## Using DateFiddler with TimezoneJS
+
+_DateFiddler_ natively supports TimezoneJS.  If you wish to enable timezones, make sure you include the
+TimezoneJS script before _DateFiddler_.
+
+    <script type="text/javascript" src="libs/timezone.js"></script>
+    <script type="text/javascript" src="libs/DateFiddler.js"></script>
+
+Also, you'll need to grab the Olson timezone files.  See [the TimezoneJS GitHub page](https://github.com/mde/timezone-js)
+for more information on how to acquire those.  Once you have that set up, you can use the `timezone` arguments, and you
+can use the `timezone()` method.  If you don't install TimezoneJS, the `timezone` arguments do nothing.
+
+
 ## API
 
 The following methods are provided by DateFiddler.
 
 ---
 
-### new DateFiddler([seedDate])
+### new DateFiddler([seedDate, [timezone]])
 
 This creates a new instance of a fiddler.  The `seedDate` argument is optional - if provided, it will
-set the standard to the given date.
+set the standard to the given date.  If TimezoneJS is loaded, you can set the optional `timezone` argument
+to a valid timezone string.
 
 ---
 
@@ -156,6 +170,18 @@ operation is reset to `.set`.
 
 Returns a JavaScript `Date` object which represents the current state of the fiddler.  You cannot
 chain from the get method.
+
+---
+
+### .getTimezone()
+
+Returns the timezone string, as long as TimezoneJS is being used.  Otherwise returns _null_.
+
+---
+
+### .getTimezoneOffset()
+
+Returns the timezone offset value, as long as TimezoneJS is being used.  Otherwise returns 0.
 
 ---
 
@@ -235,7 +261,7 @@ Depending on the operation, this modifies the year within the fiddler.
 
 ---
 
-### .date([Date | month, day, year])
+### .date([Date | month, day, year], [timezone])
 
 Depending on the operation, this will modify the date.  If the operation is `.add`, it will
 add the `month`, `day`, etc. to the fiddler.  If the operation is `.set`, it sets the date.
@@ -247,6 +273,12 @@ it will act as a date setter. _Note that "month" is ONE based, so January is 1 a
 ### .weeks(num)
 
 Depending on the operation, this modifies the week (moving the date by 7 days) within the fiddler.
+
+---
+
+### .timezone(string)
+
+If you have TimezoneJS installed, this will set the timezone of the date, otherwise it does nothing.
 
 ---
 
